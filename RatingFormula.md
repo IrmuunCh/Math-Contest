@@ -25,25 +25,23 @@ int main(){
     int additionalRating[7]={750,500,300,150,50,0};
 
     //File convert
-    ifstream fin("Rating.txt");
-    ofstream fout("RatingChange.txt");
+    //ifstream fin("Rating.txt");
+    //ofstream fout("RatingChange.txt");
 
     //Read Information
     int StudentCount;
-    fin>>StudentCount;
+    cin>>StudentCount;
     for(int i=1;i<=StudentCount;i++){
         st[i].Name=to_string(i);
         st[i].Class=0;
         st[i].ContestCount=0;
-        fin>>st[i].Name>>st[i].Rating>>st[i].ContestCount;
+        cin>>st[i].Name>>st[i].Rating>>st[i].ContestCount;
         st[i].CalculateRating=st[i].Rating+additionalRating[min(st[i].ContestCount,5)];
         id[st[i].Name]=i;
     }
-
-    fout<<"OK"<<endl;
     
     int ParticipantCount;
-    fin>>ParticipantCount;
+    cin>>ParticipantCount;
     Participant Participants[ParticipantCount];
     vector<pair<int,string>>PlaceName;
     int newStudentCount=0;
@@ -51,7 +49,7 @@ int main(){
     for(int i=0;i<ParticipantCount;i++){
         string name;
         double place;
-        fin>>name>>place;
+        cin>>name>>place;
         PlaceName.push_back({place,name});
         if(id[name]==0){
             newStudentCount++;
@@ -139,9 +137,9 @@ int main(){
             
             ParticipantDelta[i]=round(ParticipantDelta[i]);
             int NewRating=st[id[Participants[i].Name]].Rating+ParticipantDelta[i];
-            fout<<Participants[i].Name;
+            cout<<Participants[i].Name;
             while(len--){
-                fout<<" ";
+                cout<<" ";
             }
             string del="+0";
             int DeltaInt=ParticipantDelta[i];
@@ -151,20 +149,20 @@ int main(){
             if(DeltaInt<0){
                 del=to_string(DeltaInt);
             }
-            fout<<st[id[Participants[i].Name]].Rating;
+            cout<<st[id[Participants[i].Name]].Rating;
             int space=MaxLengthRating-to_string(st[id[Participants[i].Name]].Rating).size();
             while(space--){
-                fout<<" ";
+                cout<<" ";
             }
 
-            fout<<del;
+            cout<<del;
             space=MaxChangeRating-del.size();
 
             while(space--){
-                fout<<" ";
+                cout<<" ";
             }
 
-            fout<<NewRating<<endl;
+            cout<<NewRating<<endl;
 
 
             /*
@@ -181,12 +179,11 @@ int main(){
             st[Id].ContestCount++;
         }
 
-        fout<<endl<<endl;
+        cout<<endl<<endl;
 
         for(int i=1;i<=StudentCount;i++){
-            fout<<st[i].Name<<" "<<st[i].Rating<<" "<<st[i].ContestCount<<endl;
+            cout<<st[i].Name<<" "<<st[i].Rating<<" "<<st[i].ContestCount<<endl;
         }
-    
     
     }
 }
