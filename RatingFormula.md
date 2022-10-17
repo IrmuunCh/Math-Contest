@@ -35,13 +35,14 @@ int main(){
         st[i].Name=to_string(i);
         st[i].Class=0;
         st[i].ContestCount=0;
-        cin>>st[i].Name>>st[i].Rating>>st[i].ContestCount;
+        cin>>st[i].Rating>>st[i].Name>>st[i].ContestCount;
         st[i].CalculateRating=st[i].Rating+additionalRating[min(st[i].ContestCount,5)];
         id[st[i].Name]=i;
     }
     
     int ParticipantCount;
     cin>>ParticipantCount;
+    cout<<ParticipantCount<<endl;
     Participant Participants[ParticipantCount];
     vector<pair<int,string>>PlaceName;
     int newStudentCount=0;
@@ -56,9 +57,10 @@ int main(){
             New.push_back(name);
         }
     }
+    
     if(newStudentCount>0){
         for(int i=0;i<New.size();i++){
-            cout<<New[i]<<"0 0"<<endl;
+            cout<<"0 "<<New[i]<<" 0"<<endl;
         }
         return 0;
     }
@@ -69,8 +71,7 @@ int main(){
             Participants[i].Place=PlaceName[i].first;
             Participants[i].Name=PlaceName[i].second;
         }
-
-
+        
         vector<double>ExceptedPlace;
         //Find excepted place
         for(int i=0;i<ParticipantCount;i++){
@@ -82,7 +83,6 @@ int main(){
             }
             ExceptedPlace.push_back(res);
         }
-        
 
         //Avarage Place
         vector<double>AvagarePlace;
@@ -180,11 +180,14 @@ int main(){
         }
 
         cout<<endl<<endl;
-
+        vector<pair<int,pair<string,int>>>vec;
         for(int i=1;i<=StudentCount;i++){
-            cout<<st[i].Name<<" "<<st[i].Rating<<" "<<st[i].ContestCount<<endl;
+            vec.pb({st[i].Rating,{st[i].Name,st[i].ContestCount}});
         }
-    
+        sort(vec.begin(),vec.end());
+        for(int i=vec.size()-1;i>=0;i--){
+            cout<<vec[i].ff<<' '<<vec[i].ss.ff<<' '<<vec[i].ss.ss<<endl;
+        }
     }
 }
 ```
